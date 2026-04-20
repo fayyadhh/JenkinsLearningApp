@@ -1,6 +1,11 @@
 pipeline{
     agent any
 
+    environment {
+        JAVA_HOME = 'C:\\Users\\User\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-25.0.2.10-hotspot\\bin\\java.exe'
+        PATH = "${env.JAVA_HOME}\\bin;${env.PATH}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
