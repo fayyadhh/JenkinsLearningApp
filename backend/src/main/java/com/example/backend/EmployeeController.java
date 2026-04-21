@@ -1,10 +1,10 @@
 package com.example.backend;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -20,7 +20,8 @@ public class EmployeeController{
         return List.of(
                 new Employee(1L, "Fayyadh", "IT"),
                 new Employee(2L, "Fayyadh HR", "HR"),
-                new Employee(3L, "Fayyadh Something", "Something")
+                new Employee(3L, "Fayyadh Something", "Something"),
+                new Employee(4L, "Fayyadh AWS Test", "AWS")
         );
     }
 }
