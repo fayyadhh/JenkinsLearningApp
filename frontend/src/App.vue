@@ -19,7 +19,7 @@ const employees = ref([])
 const loading = ref(true)
 
 onMounted(async () => {
-  const response = await fetch('http://localhost:8080/api/employees')
+  const response = await fetch('http://13.238.201.139:8080/api/employees')
   employees.value = await response.json()
   loading.value = false
 })
