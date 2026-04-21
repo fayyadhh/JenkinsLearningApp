@@ -36,6 +36,14 @@ pipeline{
             }
         }
 
+        stage('Test SSH to EC2') {
+            steps{
+                sshagent(credentials: ['ec2-ssh-testkey']) {
+                    bat 'ssh -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "hostname"'
+                }
+            }
+        }
+
         stage('Simulate Deploy') {
             steps {
                 echo 'Pretending to deploy the backend and frontend...'
