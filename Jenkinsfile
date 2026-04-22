@@ -36,20 +36,24 @@ pipeline{
             }
         }
 
-        stage('Upload Backend to EC2') {
+        stage('Upload and Deploy Backend to EC2') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ec2-ssh-testkey', keyFileVariable: 'PK')]) {
                     bat 'icacls "%PK%" /inheritance:r'
                     bat 'icacls "%PK%" /grant:r "SYSTEM:R"'
                     
+                    //uploading the backend to ec2 as 'backend.jar'
                     bat 'scp -i "%PK%" -o StrictHostKeyChecking=no backend\\target\\backend-0.0.1-SNAPSHOT.jar ec2-user@13.238.201.139:/home/ec2-user/backend-new.jar'
-                }
-            }
-        }
 
-        stage('Simulate Deploy') {
-            steps {
-                echo 'Pretending to deploy the backend and frontend...'
+                    //stop old backend
+                    bat 'ssh -i %PK% -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "pkill -f backend.jar || true"'
+
+                    //replace the old jar file
+                    bat 'ssh -i %PK% -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "mv /home/ec2-user/backend-new.jar /home/ec2-user/backend.jar"'
+
+                    //run the new jar file
+                    bat 'ssh -i %PK% -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "nohup java -jar home/ec2-user/backend.jar > /home/ec2-user/app.log 2>&1 &"'
+                }
             }
         }
     }
