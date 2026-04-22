@@ -46,7 +46,8 @@ pipeline{
                     bat 'scp -i "%PK%" -o StrictHostKeyChecking=no backend\\target\\backend-0.0.1-SNAPSHOT.jar ec2-user@13.238.201.139:/home/ec2-user/backend-new.jar'
 
                     //stop old backend
-                    bat 'ssh -i "%PK%" -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "pkill -f \'/home/ec2-user/backend.jar\' || true"'
+                    //TODO figureout why this causes a syntax error but still works...
+                    bat 'ssh -i "%PK%" -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "ps -ef | grep \'[j]ava -jar /home/ec2-user/backend.jar\' | awk \'{print \\$2}\' | xargs -r kill"'
 
                     //replace the old jar file
                     bat 'ssh -i "%PK%" -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "rm -f /home/ec2-user/backend.jar && mv /home/ec2-user/backend-new.jar /home/ec2-user/backend.jar"'
