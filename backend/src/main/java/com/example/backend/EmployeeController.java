@@ -12,7 +12,7 @@ public class EmployeeController{
 
     @GetMapping("/api/health")
     public String health(){
-        return "ok";
+        return "ok from jenkins";
     }
 
     @GetMapping("/api/employees")
