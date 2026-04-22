@@ -36,13 +36,13 @@ pipeline{
             }
         }
 
-        stage('Test SSH to EC2') {
+        stage('Upload Backend to EC2') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ec2-ssh-testkey', keyFileVariable: 'PK')]) {
                     bat 'icacls "%PK%" /inheritance:r'
                     bat 'icacls "%PK%" /grant:r "SYSTEM:R"'
                     
-                    bat 'ssh -i "%PK%" -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "hostname"'
+                    bat 'scp -i "%PK%" -o StrictHostKeyChecking=no backend\\target\\backend-0.0.1-SNAPSHOT.jar ec2-user@13.238.201.139:/home/ec2-user/backend-new.jar'
                 }
             }
         }
