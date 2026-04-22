@@ -46,13 +46,13 @@ pipeline{
                     bat 'scp -i "%PK%" -o StrictHostKeyChecking=no backend\\target\\backend-0.0.1-SNAPSHOT.jar ec2-user@13.238.201.139:/home/ec2-user/backend-new.jar'
 
                     //stop old backend
-                    bat 'ssh -i %PK% -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "pkill -f backend.jar || true"'
+                    bat 'ssh -i "%PK%" -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "pkill -f backend.jar; exit 0"'
 
                     //replace the old jar file
-                    bat 'ssh -i %PK% -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "mv /home/ec2-user/backend-new.jar /home/ec2-user/backend.jar"'
+                    bat 'ssh -i "%PK%" -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "rm -f /home/ec2-user/backend.jar && mv /home/ec2-user/backend-new.jar /home/ec2-user/backend.jar"'
 
                     //run the new jar file
-                    bat 'ssh -i %PK% -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "nohup java -jar home/ec2-user/backend.jar > /home/ec2-user/app.log 2>&1 &"'
+                    bat 'ssh -i "%PK%" -o StrictHostKeyChecking=no ec2-user@13.238.201.139 "nohup java -jar /home/ec2-user/backend.jar > /home/ec2-user/app.log 2>&1 < /dev/null &"'
                 }
             }
         }
