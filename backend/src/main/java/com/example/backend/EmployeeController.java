@@ -21,7 +21,8 @@ public class EmployeeController{
                 new Employee(1L, "Fayyadh", "IT"),
                 new Employee(2L, "Fayyadh HR", "HR"),
                 new Employee(3L, "Fayyadh Something", "Something"),
-                new Employee(4L, "Fayyadh AWS Test", "AWS")
+                new Employee(4L, "Fayyadh AWS Test", "AWS"),
+                new Employee(5L, "Im a fat fucking chud", "Chud")
         );
     }
 }
