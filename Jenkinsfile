@@ -75,8 +75,8 @@ pipeline{
             steps {
                 dir('frontend') {
                     withEnv([
-                        'AWS_CONFIG_FILE = C:\\Users\\User\\.aws\\config',
-                        'AWS_SHARED_CREDENTIALS_FILE = C:\\Users\\User\\.aws\\credentials'
+                        'AWS_CONFIG_FILE=C:\\Users\\User\\.aws\\config',
+                        'AWS_SHARED_CREDENTIALS_FILE=C:\\Users\\User\\.aws\\credentials'
                     ]) {
                         bat 'aws s3 sync dist s3://fayyadh-frontendfor-jenkinslearningapp --delete --dryrun --profile frontend-deploy-role'
                     }
