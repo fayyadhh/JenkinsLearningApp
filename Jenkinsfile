@@ -76,7 +76,7 @@ pipeline{
                 dir('frontend') {
                     withEnv([
                         'AWS_CONFIG_FILE=C:\\Users\\User\\.aws\\config',
-                        'AWS_SHARED_CREDENTIALS_FILE=C:\\Users\\User\\.aws\\credentials'
+                        'AWS_SHARED_CREDENTIALS_FILE=C:\\Users\\User\\.aws\\credentials',
                         'USERPROFILE=C:\\Users\\User',
                         'HOME=C:\\Users\\User'
                     ]) {
