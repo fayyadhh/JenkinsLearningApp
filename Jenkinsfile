@@ -57,5 +57,13 @@ pipeline{
                 }
             }
         }
+
+        stage('Upload and Deploy Frontend to s3 DRYRUN') {
+            steps {
+                dir('frontend') {
+                    bat 'aws s3 sync dist s3://fayyadh-frontendfor-jenkinslearningapp --delete --dryrun --profile frontend-deploy-role'
+                }
+            }
+        }
     }
 }
