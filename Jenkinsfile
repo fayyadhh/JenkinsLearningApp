@@ -12,6 +12,18 @@ pipeline{
             }
         }
 
+        stage('Debug AWS Profile') {
+            steps {
+                withEnv([
+                    'AWS_CONFIG_FILE = C:\\Users\\User\\.aws\\config',
+                    'AWS_SHARED_CREDENTIALS_FILE = C:\\Users\\User\\.aws\\credentials'
+                ]) {
+                    bat 'aws configure list-profiles'
+                    bat 'aws sts get-caller-identity --profile frontend-deploy-role'
+                }
+            }
+        }
+
         stage('Build Backend') {
             steps {
                 dir('backend'){
@@ -61,7 +73,12 @@ pipeline{
         stage('Upload and Deploy Frontend to s3 DRYRUN') {
             steps {
                 dir('frontend') {
-                    bat 'aws s3 sync dist s3://fayyadh-frontendfor-jenkinslearningapp --delete --dryrun --profile frontend-deploy-role'
+                    withEnv([
+                        'AWS_CONFIG_FILE = C:\\Users\\User\\.aws\\config',
+                        'AWS_SHARED_CREDENTIALS_FILE = C:\\Users\\User\\.aws\\credentials'
+                    ]) {
+                        bat 'aws s3 sync dist s3://fayyadh-frontendfor-jenkinslearningapp --delete --dryrun --profile frontend-deploy-role'
+                    }
                 }
             }
         }
