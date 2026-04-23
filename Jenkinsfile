@@ -77,7 +77,11 @@ pipeline{
                     withEnv([
                         'AWS_CONFIG_FILE=C:\\Users\\User\\.aws\\config',
                         'AWS_SHARED_CREDENTIALS_FILE=C:\\Users\\User\\.aws\\credentials'
+                        'USERPROFILE=C:\\Users\\User',
+                        'HOME=C:\\Users\\User'
                     ]) {
+                        bat 'aws sts get-caller-identity --profile jenkins-frontend-deployment'
+                        bat 'aws sts get-caller-identity --profile frontend-deploy-role'
                         bat 'aws s3 sync dist s3://fayyadh-frontendfor-jenkinslearningapp --delete --dryrun --profile frontend-deploy-role'
                     }
                 }
