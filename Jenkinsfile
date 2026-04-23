@@ -15,11 +15,12 @@ pipeline{
         stage('Debug AWS Profile') {
             steps {
                 withEnv([
-                    'AWS_CONFIG_FILE = C:\\Users\\User\\.aws\\config',
-                    'AWS_SHARED_CREDENTIALS_FILE = C:\\Users\\User\\.aws\\credentials'
+                    'AWS_CONFIG_FILE=C:\\Users\\User\\.aws\\config',
+                    'AWS_SHARED_CREDENTIALS_FILE=C:\\Users\\User\\.aws\\credentials'
                 ]) {
-                    bat 'aws configure list-profiles'
-                    bat 'aws sts get-caller-identity --profile frontend-deploy-role'
+                    bat 'echo AWS_CONFIG_FILE=%AWS_CONFIG_FILE%'
+                    bat 'if exist "%AWS_CONFIG_FILE%" (echo CONFIG EXISTS) else (echo CONFIG DONT EXIST)'
+                    bat 'type "%AWS_CONFIG_FILE%"'
                 }
             }
         }
