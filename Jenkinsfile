@@ -71,7 +71,7 @@ pipeline{
             }
         }
 
-        stage('Upload and Deploy Frontend to s3 DRYRUN') {
+        stage('Upload and Deploy Frontend to s3') {
             steps {
                 dir('frontend') {
                     withEnv([
@@ -82,7 +82,7 @@ pipeline{
                     ]) {
                         bat 'aws sts get-caller-identity --profile jenkins-frontend-deployment'
                         bat 'aws sts get-caller-identity --profile frontend-deploy-role'
-                        bat 'aws s3 sync dist s3://fayyadh-frontendfor-jenkinslearningapp --delete --dryrun --profile frontend-deploy-role'
+                        bat 'aws s3 sync dist s3://fayyadh-frontendfor-jenkinslearningapp --delete --profile frontend-deploy-role'
                     }
                 }
             }
