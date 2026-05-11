@@ -14,6 +14,8 @@ pipeline{
 
         stage('Test from CD App'){}
 
+        stage('Testing Commit from CD APP') {}
+
         stage('Debug AWS Profile') {
             steps {
                 withEnv([
