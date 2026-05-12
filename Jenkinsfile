@@ -9,12 +9,11 @@ pipeline{
         stage('Checkout') {
             steps {
                 checkout scm
+
             }
         }
 
-        stage('Test from CD App'){}
-
-        stage('Testing Commit from CD APP') {}
+        stage('testing to show you'){}
 
         stage('Debug AWS Profile') {
             steps {
