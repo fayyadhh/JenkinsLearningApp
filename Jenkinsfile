@@ -13,7 +13,7 @@ pipeline{
             }
         }
 
-        stage('github connection test'){}
+        stage('vincent'){}
 
         stage('Debug AWS Profile') {
             steps {
