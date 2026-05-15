@@ -13,7 +13,7 @@ pipeline{
             }
         }
 
-        stage('vincent'){}
+        stage('health check'){}
 
         stage('Debug AWS Profile') {
             steps {
