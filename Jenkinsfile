@@ -1,17 +1,21 @@
 pipeline {
-    agent any
+  agent any
 
-    stages {
-      stage('Checkout') {
-        steps {
-          checkout scm
-        }
+  stages {
+    stage('Checkout Source') {
+      steps {
+        checkout scm
       }
-
-      stage('Build') {
-        steps{
-          echo 'Build stage not configured yet...'
-        }
+    }
+    stage('NPM Install') {
+      steps {
+        sh 'npm ci'
+      }
+    }
+    stage('Run Command') {
+      steps {
+        sh 'this is coming from the builder... hello world...'
       }
     }
   }
+}
