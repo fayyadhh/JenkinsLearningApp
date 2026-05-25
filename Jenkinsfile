@@ -9,7 +9,7 @@ pipeline {
     }
     stage('NPM Install') {
       steps {
-        sh 'npm ci'
+        sh ''
       }
     }
     stage('Run Command') {
